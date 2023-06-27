@@ -1,14 +1,56 @@
 let myLibrary = [];
+let addCount = 0;
 
-function Book() {
-  //constructor
+addBookToLibrary(new Book("Example 1", "Author 1", false))
+addBookToLibrary(new Book("Example 2", "Author 2", false))
+addBookToLibrary(new Book("Example 3", "Author 3", false))
+refreshTable();
+
+function Book(title,author,isRead) {
+    addCount++
+    this.title = title
+    this.author = author
+    this.bookID= addCount
+    this.isRead = isRead    
+    this.isDelete = false
 }
 
-function addBookToLibrary() {
-  // do stuff here
+function addBookToLibrary(book) {
+    myLibrary.push(book)
 }
 
+function refreshTable(){
+    clearAllRows()
+    myLibrary.forEach(populateRow);
+}
 
+function clearAllRows(){
+    for (const row of document.querySelectorAll('.bookDataRow')) {
+        row.remove();
+    }
+};
+
+function populateRow(tempBook){
+    if (tempBook.isDelete == true){return}
+    newRow = mainTable.insertRow(-1);
+    newRow.classList.add("bookDataRow")
+    newRow.classList.add("bookID"+tempBook.bookID)
+
+    newTitleCell =  newRow.insertCell(0);
+    newAuthorCell =  newRow.insertCell(1);
+    newReadCell =  newRow.insertCell(2);
+
+    newTitleCell.innerHTML =  '<div class="textCell bookID'+tempBook.bookID+'">'+tempBook.title+ '</div>' ;
+    newAuthorCell.innerHTML =  '<div class="textCell bookID'+tempBook.bookID+'">'+tempBook.author+ '</div>';
+
+    newReadCell.classList.add("lastColTd");
+
+    if(tempBook.isRead){
+        newReadCell.innerHTML='<div class="lastColCell"><div class="fullIcon statusIcon tableIcon bookID'+tempBook.bookID+'"></div><div class="tableIcon deleteIcon bookID'+tempBook.bookID+'"></div></div>';
+    }else{
+        newReadCell.innerHTML='<div class="lastColCell"><div class="emptyIcon statusIcon tableIcon bookID'+tempBook.bookID+'"></div><div class="tableIcon deleteIcon bookID'+tempBook.bookID+'"></div></div>';
+    };
+}
 
 document.addEventListener("click",e=>{
 
@@ -29,37 +71,37 @@ document.addEventListener("click",e=>{
     }
 
     //for chaging status
-    if (e.target.classList.contains("fullIcon")){
-        e.target.classList.remove("fullIcon");
-        e.target.classList.add("emptyIcon");
-    } else if (e.target.classList.contains("halfIcon")){
-        e.target.classList.remove("halfIcon");
-        e.target.classList.add("fullIcon");
-    }else if (e.target.classList.contains("emptyIcon")){
-        e.target.classList.remove("emptyIcon");
-        e.target.classList.add("halfIcon");
+    if (e.target.classList.contains("statusIcon")){        myLibrary.forEach(function(book){
+            if(e.target.classList.contains("bookID"+book.bookID)){
+                if (book.isRead == true){
+                    book.isRead = false
+                }else{
+                    book.isRead= true
+                }
+            }
+        });
+        refreshTable()
     }
+
+    //cilck delete icon
+    if (e.target.classList.contains("deleteIcon")){
+        myLibrary.forEach(function(book){
+            if(e.target.classList.contains("bookID"+book.bookID)){
+                book.isDelete = true
+                
+            }
+        });
+        refreshTable()
+    }
+        
 });
 
 
 addBtn.addEventListener("click", e=>{
-    
-    newRow = mainTable.insertRow(-1);
+    //add book to myLibrary
+    let newBook = new Book(titleInput.value, authorInput.value, readInput.checked)
+    addBookToLibrary(newBook)
+    refreshTable();
+    newPopUp.style.display = "none"
 
-    newTitleCell =  newRow.insertCell(0);
-    newAuthorCell =  newRow.insertCell(1);
-    newReadCell =  newRow.insertCell(2);
-
-    newTitleCell.innerHTML =  '<div class="textCell">'+titleInput.value+ '</div>' ;
-    newAuthorCell.innerHTML =  '<div class="textCell">'+authorInput.value+ '</div>';
-
-    newReadCell.classList.add("lastColTd");
-
-    if(readInput.checked){
-        newReadCell.innerHTML='<div class="lastColCell"><div class="fullIcon statusIcon tableIcon"></div><div class="tableIcon deleteIcon"></div></div>';
-    }else{
-        newReadCell.innerHTML='<div class="lastColCell"><div class="emptyIcon statusIcon tableIcon"></div><div class="tableIcon deleteIcon"></div></div>';
-    };
-      
-    newPopUp.style.display = "none";
 })
