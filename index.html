@@ -1,58 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>📚 odin-library</title>
-    <link rel="stylesheet" href="reset.css">    
-    <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="mainSection">
-        <div id="upperSection">
-            <h1>My Book Tracker</h1>
-            <img id="addIcon" src="resources/plus-circle.svg" alt="add book">
-        </div>
-        
-        <div id="lowerSection">
-            <table id="mainTable">
-                <colgroup>
-                    <col id="titleCol">
-                    <col id="authorCol">
-                    <col id="lastCol">
-                </colgroup>
-                <tr>
-                    <th id="titleHeader">Title</th>
-                    <th id="authorHeader">Author</th>
-                </tr>
-                <tr class="bookDataRow">
-                    <td><div class="textCell">Naruto</div></td>
-                    <td><div class="textCell">Mashashi Kishimoto</div></td>
-                    <td class = "lastColTd">
-                        <div class="lastColCell"><div class="fullIcon statusIcon tableIcon"></div><div class="tableIcon deleteIcon"></div></div>
-                    </td>
-                </tr>
-            </table>
-        </div>        
+      <div id="upperSection">
+        <h1>My Book Tracker</h1>
+        <img id="addIcon" src="resources/plus-circle.svg" alt="add book" />
+      </div>
+
+      <div id="lowerSection">
+        <table id="mainTable">
+          <colgroup>
+            <col id="titleCol" />
+            <col id="authorCol" />
+            <col id="lastCol" />
+          </colgroup>
+          <tr>
+            <th id="titleHeader">Title</th>
+            <th id="authorHeader">Author</th>
+          </tr>
+          <tr class="bookDataRow">
+            <td><div class="textCell">Naruto</div></td>
+            <td><div class="textCell">Mashashi Kishimoto</div></td>
+            <td class="lastColTd">
+              <div class="lastColCell">
+                <div class="fullIcon statusIcon tableIcon"></div>
+                <div class="tableIcon deleteIcon"></div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-    
-</body>
-<div id="newPopUp">
+  </body>
+  <div id="newPopUp">
     <fieldset>
-        <div id="formContainer">
-            <legend>Add new book</legend>
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="titleInput">
-            <label for="author" >Author:</label>
-            <input type="text" name = "author" id="authorInput">
-            <div id="readDiv">
-                <label for="read">Read?</label>
-                <input type="checkbox" name="read" id="readInput">
-            </div>
-            
-            <button id="addBtn">Add</button>
+      <div id="formContainer">
+        <legend>Add new book</legend>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="titleInput" required />
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="authorInput" required />
+        <div id="readDiv">
+          <label for="read">Read?</label>
+          <input type="checkbox" name="read" id="readInput" />
         </div>
+
+        <button id="addBtn">Add</button>
+      </div>
     </fieldset>
-</div>
+  </div>
 </html>
