@@ -75,13 +75,22 @@ function populateRow(tempBook) {
 }
 
 function checkInputs() {
+  let errorExists = false
   if (titleInput.value.length == 0) {
-    alert("Title must be filled out")
-    thisIsAnErrorToStopDebugger
+    titleError.innerHTML = "Title must be filled out"
+    errorExists = true
+  } else {
+    titleError.innerHTML = ""
   }
 
   if (authorInput.value.length == 0) {
-    alert("Author name must be filled out")
+    authorError.innerHTML = "Author name must be filled out"
+    errorExists = true
+  } else {
+    authorError.innerHTML = ""
+  }
+
+  if (errorExists == true) {
     thisIsAnErrorToStopDebugger
   }
 }
